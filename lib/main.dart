@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
         builder: (context, isDarkMode) {
           return MaterialApp(
             title: 'Task Manager demo',
+            debugShowCheckedModeBanner: false,
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
