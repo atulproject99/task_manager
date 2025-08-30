@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:task_manager/core/constants.dart';
+import 'package:task_manager/core/app_strings.dart';
 import 'package:task_manager/features/task_manager/domain/entities/task.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_bloc.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_event.dart';
@@ -72,7 +73,9 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
     final dateStr = DateFormat.yMMMd().format(_dueDate);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.task == null ? 'Add Task' : 'Edit Task'),
+        title: Text(
+          widget.task == null ? AppStrings.addTask : AppStrings.editTask,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -83,12 +86,12 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
               TextFormField(
                 controller: _titleCtrl,
                 decoration: const InputDecoration(
-                  labelText: 'Title',
+                  labelText: AppStrings.title,
                   border: OutlineInputBorder(),
                 ),
                 validator: (v) {
                   if (v == null || v.trim().length < 3) {
-                    return 'Title must be at least 3 characters';
+                    return AppStrings.titleValidation;
                   }
                   return null;
                 },
@@ -99,7 +102,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                 minLines: 2,
                 maxLines: 4,
                 decoration: const InputDecoration(
-                  labelText: 'Description',
+                  labelText: AppStrings.description,
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -109,25 +112,28 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                 items: const [
                   DropdownMenuItem(
                     value: TaskStatus.todo,
-                    child: Text('To Do'),
+                    child: Text(AppStrings.toDo),
                   ),
                   DropdownMenuItem(
                     value: TaskStatus.inProgress,
-                    child: Text('In Progress'),
+                    child: Text(AppStrings.inProgress),
                   ),
-                  DropdownMenuItem(value: TaskStatus.done, child: Text('Done')),
+                  DropdownMenuItem(
+                    value: TaskStatus.done,
+                    child: Text(AppStrings.done),
+                  ),
                 ],
                 onChanged: (val) =>
                     setState(() => _status = val ?? TaskStatus.todo),
                 decoration: const InputDecoration(
-                  labelText: 'Status',
+                  labelText: AppStrings.status,
                   border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Due Date'),
+                title: const Text(AppStrings.dueDate),
                 subtitle: Text(dateStr),
                 trailing: IconButton(
                   icon: const Icon(Icons.date_range),
@@ -138,7 +144,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
               ElevatedButton.icon(
                 onPressed: _save,
                 icon: const Icon(Icons.save),
-                label: const Text('Save'),
+                label: const Text(AppStrings.save),
               ),
             ],
           ),

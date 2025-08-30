@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:task_manager/core/app_strings.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_bloc.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_event.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_state.dart';
@@ -17,21 +18,23 @@ class TaskListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task Manager'),
+        title: const Text(AppStrings.taskManager),
         actions: [
           IconButton(
-            tooltip: 'Toggle theme',
+            tooltip: AppStrings.toggleTheme,
             onPressed: () => context.read<ThemeCubit>().toggle(),
             icon: const Icon(Icons.brightness_6),
           ),
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AddEditTaskScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const AddEditTaskScreen(),
+                ),
               );
             },
             icon: const Icon(Icons.add),
-            tooltip: 'Add',
+            tooltip: AppStrings.add,
           ),
         ],
       ),
@@ -49,7 +52,7 @@ class TaskListScreen extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (state.visible.isEmpty) {
-                    return const EmptyView(message: 'No tasks to show');
+                    return const EmptyView(message: AppStrings.noTasks);
                   }
                   return ReorderableListView.builder(
                     itemCount: state.visible.length,
@@ -84,12 +87,12 @@ class TaskListScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.of(
-            context,
-          ).push(MaterialPageRoute(builder: (context) => AddEditTaskScreen()));
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AddEditTaskScreen()),
+          );
         },
         icon: const Icon(Icons.add_task),
-        label: const Text('New Task'),
+        label: const Text(AppStrings.newTask),
       ),
     );
   }

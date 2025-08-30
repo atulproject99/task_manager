@@ -9,8 +9,8 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        backgroundColor: AppColors.red,
-        iconColor: AppColors.white,
+        backgroundColor: AppColors.white,
+        iconColor: AppColors.purple,
         textStyle: const TextStyle(fontSize: 18, color: AppColors.white),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       ),

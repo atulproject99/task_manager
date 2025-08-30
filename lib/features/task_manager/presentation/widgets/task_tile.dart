@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:task_manager/core/app_colors.dart';
 import 'package:task_manager/core/constants.dart';
 import 'package:task_manager/features/task_manager/domain/entities/task.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_bloc.dart';
@@ -18,13 +19,13 @@ class TaskTile extends StatelessWidget {
     return Dismissible(
       key: ValueKey(task.id),
       background: Container(
-        color: Colors.green,
+        color: AppColors.green,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: const Icon(Icons.check, color: Colors.white),
       ),
       secondaryBackground: Container(
-        color: Colors.orange,
+        color: AppColors.orange,
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: const Icon(Icons.timelapse, color: Colors.white),
