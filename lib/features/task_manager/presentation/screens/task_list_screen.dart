@@ -5,6 +5,7 @@ import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_event.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/task_bloc/task_state.dart';
 import 'package:task_manager/features/task_manager/presentation/blocs/theme_cubit.dart';
+import 'package:task_manager/features/task_manager/presentation/screens/add_edit_task_screen.dart';
 import 'package:task_manager/features/task_manager/presentation/widgets/empty_view.dart';
 import 'package:task_manager/features/task_manager/presentation/widgets/filter_bar.dart';
 import 'package:task_manager/features/task_manager/presentation/widgets/task_tile.dart';
@@ -24,7 +25,11 @@ class TaskListScreen extends StatelessWidget {
             icon: const Icon(Icons.brightness_6),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AddEditTaskScreen()),
+              );
+            },
             icon: const Icon(Icons.add),
             tooltip: 'Add',
           ),
@@ -57,7 +62,17 @@ class TaskListScreen extends StatelessWidget {
                       final task = state.visible[index];
                       return Card(
                         key: ValueKey('${task.id}_card'),
-                        child: TaskTile(task: task, onTap: () {}),
+                        child: TaskTile(
+                          task: task,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddEditTaskScreen(task: task),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     },
                   );
@@ -68,7 +83,11 @@ class TaskListScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => AddEditTaskScreen()));
+        },
         icon: const Icon(Icons.add_task),
         label: const Text('New Task'),
       ),
